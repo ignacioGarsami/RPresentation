@@ -1,0 +1,92 @@
+---
+title: "RPresentation assignment: Data description"
+author: "Ignacio Garcia Sanchez-Migallon"
+date: "26/2/2020"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+rm(list=ls())
+data(esoph)
+library(ggplot2)
+library(tidyverse)
+```
+
+## Introducion : Esophageal cancer data
+
+The selected data comes from a case-control study of esophageal cancer in Ille-et-Vilaine, France.
+It is composed by the following attributes:
+
+- Age group
+- Alcohol consumption group
+- Tobacco consumption group
+- Number of cancer cases registered for this group
+- Total of subjects in this group
+
+
+## Age group
+
+Age group is composed by the following groups:
+
+- 35-34 years old
+- 35-44 years old
+- 45-54 years old
+- 55-64 years old
+- 65-74 years old
+- 75+ years old
+
+## Age group
+
+```{r group}
+esoph %>%
+ggplot(mapping =  aes(x = agegp, y = ncases)) + 
+geom_bar(stat = 'identity', position = position_dodge()) + 
+labs(title = 'Esophageal cancer patients by age group', x = 'Age group', y = 'Number of cases') +
+theme_classic()
+
+```
+
+## Alcohol consumption
+
+Alcohol consumption is organized in groups based on daily alcohol intake measured in grams:
+
+- 0-39g a day
+- 40-79g a day
+- 80-119g a day
+- +120g a day
+
+## Alcohol consumption
+
+```{r alcohol}
+esoph %>%
+ggplot(mapping =  aes(x = alcgp, y = ncases, fill = agegp)) + 
+geom_bar(stat = 'identity', position = position_dodge()) + 
+labs(title = 'Esophageal cancer patients by alcohol consumption', x = 'Alcohol consumption', y = 'Number of cases') +
+theme_classic()
+
+```
+
+## Tobacco Consumption
+
+Tobacco consumption is organized in groups based on cigaretters smoked per day:
+
+- 0-9 cigarettes smoked per day
+- 10-19 cigarettes smoked per day
+- 20-29 cigarettes smoked per day
+- 30+ cigarettes smoked per day
+
+## Tobacco Consumption
+
+```{r tobacco}
+esoph %>%
+ggplot(mapping =  aes(x = tobgp, y = ncases, fill = agegp)) + 
+geom_bar(stat = 'identity', position = position_dodge()) + 
+labs(title = 'Esophageal cancer patients by tobacco consumption', x = 'Tobacco consumption', y = 'Number of cases') +
+theme_classic()
+
+```
+
+
