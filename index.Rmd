@@ -1,10 +1,12 @@
 ---
 title: "RPresentation assignment: Data description"
 author: "Ignacio Garcia Sanchez-Migallon"
+font-family: 'Courier New'
 date: "26/2/2020"
 output:
   slidy_presentation: default
-  ioslides_presentation: default
+  ioslides_presentation: default---
+---
 ---
 
 ```{r setup, include=FALSE}
@@ -13,9 +15,10 @@ rm(list=ls())
 data(esoph)
 library(ggplot2)
 library(tidyverse)
+library(plotly)
 ```
 
-## Introducion : Esophageal cancer data
+## Introducion : Esophageal cancer data 
 
 The selected data comes from a case-control study of esophageal cancer in Ille-et-Vilaine, France.
 It is composed by the following attributes:
@@ -25,6 +28,7 @@ It is composed by the following attributes:
 - Tobacco consumption group
 - Number of cancer cases registered for this group
 - Total of subjects in this group
+
 
 
 ## Age group
@@ -41,11 +45,14 @@ Age group is composed by the following groups:
 ## Age group
 
 ```{r group}
-esoph %>%
-ggplot(mapping =  aes(x = agegp, y = ncases)) + 
+
+
+plot = esoph %>% ggplot(mapping =  aes(x = esoph$agegp, y = esoph$ncases)) + 
 geom_bar(stat = 'identity', position = position_dodge()) + 
 labs(title = 'Esophageal cancer patients by age group', x = 'Age group', y = 'Number of cases') +
 theme_classic()
+
+ggplotly(plot)
 
 ```
 
@@ -61,11 +68,13 @@ Alcohol consumption is organized in groups based on daily alcohol intake measure
 ## Alcohol consumption
 
 ```{r alcohol}
-esoph %>%
+plot = esoph %>%
 ggplot(mapping =  aes(x = alcgp, y = ncases, fill = agegp)) + 
 geom_bar(stat = 'identity', position = position_dodge()) + 
 labs(title = 'Esophageal cancer patients by alcohol consumption', x = 'Alcohol consumption', y = 'Number of cases') +
 theme_classic()
+
+ggplotly(plot)
 
 ```
 
@@ -81,11 +90,13 @@ Tobacco consumption is organized in groups based on cigaretters smoked per day:
 ## Tobacco Consumption
 
 ```{r tobacco}
-esoph %>%
+plot = esoph %>%
 ggplot(mapping =  aes(x = tobgp, y = ncases, fill = agegp)) + 
 geom_bar(stat = 'identity', position = position_dodge()) + 
 labs(title = 'Esophageal cancer patients by tobacco consumption', x = 'Tobacco consumption', y = 'Number of cases') +
 theme_classic()
+
+ggplotly(plot)
 
 ```
 
